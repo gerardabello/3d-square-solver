@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import puzzle from './puzzle'
+import puzzle from './../data'
 
 import { getBugPairs } from './get-bug-pairs'
 import { isSolvedBoard } from './validations'

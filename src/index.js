@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import * as R from 'ramda'
 
-import puzzle from './solver/puzzle'
-
+import puzzle from './data'
 import solvePuzzle from './solver/solver'
 
 const validatePuzzle = puzzle =>

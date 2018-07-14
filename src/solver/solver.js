@@ -16,16 +16,8 @@ const getUsedPieces = boardState =>
 
 const getUnusedPieces = (puzzle, boardState) => {
   const piecesIndexes = R.range(0, R.apply(R.multiply, puzzle.size))
-
   const usedPieces = getUsedPieces(boardState)
-
   return R.difference(piecesIndexes, usedPieces)
-}
-
-export default async (puzzle, render) => {
-  let boardState = generateEmptyBoard(puzzle)
-
-  return followSolution(render)(puzzle, boardState, 0)
 }
 
 const followSolution = render => async (puzzle, boardState, solveIndex) => {
@@ -47,7 +39,7 @@ const followSolution = render => async (puzzle, boardState, solveIndex) => {
 
       render(boardState)
 
-      await delay(1000)
+      await delay(0)
 
       if (isValidBoard(boardState, puzzle)) {
         const solution = await followSolution(render)(
@@ -59,4 +51,10 @@ const followSolution = render => async (puzzle, boardState, solveIndex) => {
       }
     }
   }
+}
+
+export default async (puzzle, render) => {
+  let boardState = generateEmptyBoard(puzzle)
+
+  return followSolution(render)(puzzle, boardState, 0)
 }

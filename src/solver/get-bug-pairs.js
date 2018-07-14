@@ -15,9 +15,9 @@ const generatePairsFromSeam = (
   const bugDirections = seamDirection ? [3, 1] : [2, 0]
   const positions = R.range(0, nPairs).map(
     i =>
-      seamDirection
+      (seamDirection
         ? [[seamIndex, i], [seamIndex + 1, i]]
-        : [[i, seamIndex], [i, seamIndex + 1]]
+        : [[i, seamIndex], [i, seamIndex + 1]])
   )
 
   const indexesRotations = R.map(

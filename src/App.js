@@ -14,8 +14,8 @@ const Main = styled.main`
 const Board = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 800px;
-  height: 800px;
+  width: 600px;
+  height: 600px;
   margin: 0 auto;
 `
 

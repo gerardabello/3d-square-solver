@@ -25,7 +25,7 @@ const Square = styled.div`
   user-select: none;
 `
 
-const BUG_SIZE = '120'
+const BUG_SIZE = '85'
 
 const Top = styled.div`
   position: absolute;
@@ -86,7 +86,7 @@ const colorMap = type => {
     case BEE:
       return '🐝'
     default:
-      return '❌'
+      return ''
   }
 }
 
