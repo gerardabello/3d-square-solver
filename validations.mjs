@@ -10,6 +10,12 @@ export const isFullBoard = R.compose(
   R.map(R.prop('pieceIndex'))
 )
 
+export const isValidBoard = (boardState, puzzle) =>
+  R.all(
+    R.equals(true),
+    getBugPairs(boardState, puzzle).map(R.apply(isValidBugPair))
+  )
+
 export const isSolvedBoard = (boardState, puzzle) =>
   R.all(
     R.equals(true),
