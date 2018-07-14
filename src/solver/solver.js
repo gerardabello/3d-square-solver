@@ -1,6 +1,8 @@
 import * as R from 'ramda'
 import { isValidBoard } from './validations'
 
+const delay = ms => new Promise(res => setTimeout(res, ms))
+
 export const generateEmptyBoard = puzzle =>
   R.range(0, puzzle.size[0]).map(_ =>
     R.range(0, puzzle.size[1]).map(_ => ({
@@ -20,13 +22,13 @@ const getUnusedPieces = (puzzle, boardState) => {
   return R.difference(piecesIndexes, usedPieces)
 }
 
-export default (puzzle, render) => {
+export default async (puzzle, render) => {
   let boardState = generateEmptyBoard(puzzle)
 
   return followSolution(render)(puzzle, boardState, 0)
 }
 
-const followSolution = render => (puzzle, boardState, solveIndex) => {
+const followSolution = render => async (puzzle, boardState, solveIndex) => {
   const target = [
     solveIndex % puzzle.size[1],
     Math.floor(solveIndex / puzzle.size[1])
@@ -45,8 +47,10 @@ const followSolution = render => (puzzle, boardState, solveIndex) => {
 
       render(boardState)
 
+      await delay(1000)
+
       if (isValidBoard(boardState, puzzle)) {
-        const solution = followSolution(render)(
+        const solution = await followSolution(render)(
           puzzle,
           R.clone(boardState),
           solveIndex + 1

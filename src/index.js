@@ -21,8 +21,8 @@ const render = puzzle => boardState =>
     document.getElementById('root')
   )
 
-const solutionBoard = solvePuzzle(puzzle, render(puzzle))
-
-if (solutionBoard) {
-  render(puzzle, solutionBoard)
-}
+solvePuzzle(puzzle, render(puzzle)).then(solutionBoard => {
+  if (solutionBoard) {
+    render(puzzle, solutionBoard)
+  }
+})
