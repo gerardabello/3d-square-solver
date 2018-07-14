@@ -1,4 +1,4 @@
-import R from 'ramda'
+import * as R from 'ramda'
 
 // direction = 0:left, 1: top, 2: right, 3: bottom
 const getBugInDirection = (piece, rotation, direction) =>

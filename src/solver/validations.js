@@ -1,4 +1,4 @@
-import R from 'ramda'
+import * as R from 'ramda'
 
 import { getBugPairs } from './get-bug-pairs'
 

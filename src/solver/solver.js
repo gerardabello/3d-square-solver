@@ -1,4 +1,4 @@
-import R from 'ramda'
+import * as R from 'ramda'
 import { isValidBoard } from './validations'
 
 export const generateEmptyBoard = puzzle =>
@@ -20,13 +20,13 @@ const getUnusedPieces = (puzzle, boardState) => {
   return R.difference(piecesIndexes, usedPieces)
 }
 
-export default puzzle => {
+export default (puzzle, render) => {
   let boardState = generateEmptyBoard(puzzle)
 
-  return followSolution(puzzle, boardState, 0)
+  return followSolution(render)(puzzle, boardState, 0)
 }
 
-const followSolution = (puzzle, boardState, solveIndex) => {
+const followSolution = render => (puzzle, boardState, solveIndex) => {
   const target = [
     solveIndex % puzzle.size[1],
     Math.floor(solveIndex / puzzle.size[1])
@@ -34,8 +34,6 @@ const followSolution = (puzzle, boardState, solveIndex) => {
 
   console.log('solveIndex: ', solveIndex)
   console.log('target: ', target)
-
-  debugger
 
   const unused = getUnusedPieces(puzzle, boardState)
 
@@ -45,8 +43,10 @@ const followSolution = (puzzle, boardState, solveIndex) => {
       boardState[target[0]][target[1]].pieceIndex = pieceIndex
       boardState[target[0]][target[1]].rotation = rotation
 
+      render(boardState)
+
       if (isValidBoard(boardState, puzzle)) {
-        const solution = followSolution(
+        const solution = followSolution(render)(
           puzzle,
           R.clone(boardState),
           solveIndex + 1
