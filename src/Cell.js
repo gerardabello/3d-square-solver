@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'react-emotion'
 
-const SEAN_COLOR = '#8A9A7A'
-const SEAN_WIDTH = '1px'
+const SEAM_COLOR = '#8A9A7A'
+const SEAM_WIDTH = '1px'
 
 const Square = styled.div`
   position: relative;
@@ -17,7 +17,7 @@ const Square = styled.div`
   transform: rotate(${p => p.rotation * 90}deg);
 
   background-color: #d5efbb;
-  box-shadow: 0 0 0 ${SEAN_WIDTH} ${SEAN_COLOR};
+  box-shadow: 0 0 0 ${SEAM_WIDTH} ${SEAM_COLOR};
 
   user-select: none;
 `
