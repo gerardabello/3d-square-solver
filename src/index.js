@@ -21,8 +21,8 @@ const render = puzzle => boardState =>
     document.getElementById('root')
   )
 
-solvePuzzle(puzzle, throttle(render(puzzle), 500)).then(solutionBoard => {
+solvePuzzle(puzzle, render(puzzle)).then(solutionBoard => {
   if (solutionBoard) {
-    render(puzzle, solutionBoard)
+    console.log('SOLVED!')
   }
 })

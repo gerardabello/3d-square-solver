@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { isValidBoard } from './validations'
+import { isValidBoard, isFullBoard } from './validations'
 
 const delay = ms => new Promise(res => setTimeout(res, ms))
 
@@ -35,15 +35,19 @@ const followSolution = render => async (puzzle, boardState, solveIndex) => {
       boardState[target[0]][target[1]].rotation = rotation
 
       render(boardState)
-
       await delay(0)
 
       if (isValidBoard(boardState, puzzle)) {
+        if (isFullBoard(boardState)) {
+          return R.clone(boardState)
+        }
+
         const solution = await followSolution(render)(
           puzzle,
           R.clone(boardState),
           solveIndex + 1
         )
+
         if (solution) return solution
       }
     }
