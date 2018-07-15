@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import * as R from 'ramda'
 
+import { throttle } from './utils'
 import puzzle from './data'
 import solvePuzzle from './solver/solver'
 
@@ -20,7 +21,7 @@ const render = puzzle => boardState =>
     document.getElementById('root')
   )
 
-solvePuzzle(puzzle, render(puzzle)).then(solutionBoard => {
+solvePuzzle(puzzle, throttle(render(puzzle), 500)).then(solutionBoard => {
   if (solutionBoard) {
     render(puzzle, solutionBoard)
   }

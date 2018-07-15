@@ -26,24 +26,21 @@ const Row = styled.div`
 
 class App extends Component {
   renderCell = (cell, index) => {
-    const getCellByPosition = pos => cell[(pos + cell.rotation) % 4]
+    const getCellByPosition = pos => cell[(4 + pos - cell.rotation) % 4]
     return (
       <Cell
         key={index}
-        left={{ ...getCellByPosition(0) }}
-        top={{ ...getCellByPosition(1) }}
-        right={{ ...getCellByPosition(2) }}
-        bottom={{ ...getCellByPosition(3) }}
+        rotation={cell.rotation}
+        left={cell[0]}
+        top={cell[1]}
+        right={cell[2]}
+        bottom={cell[3]}
       />
     )
   }
 
   renderRow = (row, index) => {
-    return (
-      <Row key={index}>
-        {row.map(this.renderCell)}
-      </Row>
-    )
+    return <Row key={index}>{row.map(this.renderCell)}</Row>
   }
 
   render () {
@@ -60,9 +57,7 @@ class App extends Component {
 
     return (
       <Main>
-        <Board>
-          {rows.map(this.renderRow)}
-        </Board>
+        <Board>{rows.map(this.renderRow)}</Board>
       </Main>
     )
   }

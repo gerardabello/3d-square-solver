@@ -2,7 +2,7 @@ import * as R from 'ramda'
 
 // direction = 0:left, 1: top, 2: right, 3: bottom
 const getBugInDirection = (piece, rotation, direction) =>
-  piece[(direction + rotation) % 4]
+  piece[(4 + direction - rotation) % 4]
 
 // seamDirection true=horizontal
 const generatePairsFromSeam = (
@@ -15,9 +15,9 @@ const generatePairsFromSeam = (
   const bugDirections = seamDirection ? [3, 1] : [2, 0]
   const positions = R.range(0, nPairs).map(
     i =>
-      (seamDirection
+      seamDirection
         ? [[seamIndex, i], [seamIndex + 1, i]]
-        : [[i, seamIndex], [i, seamIndex + 1]])
+        : [[i, seamIndex], [i, seamIndex + 1]]
   )
 
   const indexesRotations = R.map(

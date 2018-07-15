@@ -22,12 +22,9 @@ const getUnusedPieces = (puzzle, boardState) => {
 
 const followSolution = render => async (puzzle, boardState, solveIndex) => {
   const target = [
-    solveIndex % puzzle.size[1],
-    Math.floor(solveIndex / puzzle.size[1])
+    Math.floor(solveIndex / puzzle.size[1]),
+    solveIndex % puzzle.size[1]
   ]
-
-  console.log('solveIndex: ', solveIndex)
-  console.log('target: ', target)
 
   const unused = getUnusedPieces(puzzle, boardState)
 

@@ -14,13 +14,10 @@ const Square = styled.div`
   min-width: 100px;
   min-height: 100px;
 
-  background-color: #D5EFBB;
-  box-shadow:
-    ${SEAN_WIDTH} 0 0 0 ${SEAN_COLOR},
-    0 ${SEAN_WIDTH} 0 0 ${SEAN_COLOR},
-    ${SEAN_WIDTH} ${SEAN_WIDTH} 0 0 ${SEAN_COLOR},
-    ${SEAN_WIDTH} 0 0 0 ${SEAN_COLOR} inset,
-    0 ${SEAN_WIDTH} 0 0 ${SEAN_COLOR} inset;
+  transform: rotate(${p => p.rotation * 90}deg);
+
+  background-color: #d5efbb;
+  box-shadow: 0 0 0 ${SEAN_WIDTH} ${SEAN_COLOR};
 
   user-select: none;
 `
@@ -90,13 +87,13 @@ const colorMap = type => {
   }
 }
 
-const Cell = ({ top, bottom, left, right }) => {
+const Cell = ({ rotation, top, bottom, left, right }) => {
   return (
-    <Square>
-      <Top children={colorMap(top.type)} head={top.head} />
-      <Left children={colorMap(left.type)} head={left.head} />
-      <Right children={colorMap(right.type)} head={right.head} />
-      <Bottom children={colorMap(bottom.type)} head={bottom.head} />
+    <Square rotation={rotation}>
+      {top && <Top children={colorMap(top.type)} head={top.head} />}
+      {left && <Left children={colorMap(left.type)} head={left.head} />}
+      {right && <Right children={colorMap(right.type)} head={right.head} />}
+      {bottom && <Bottom children={colorMap(bottom.type)} head={bottom.head} />}
     </Square>
   )
 }
